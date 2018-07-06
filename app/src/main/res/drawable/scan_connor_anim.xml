@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/conner_01_00000_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00010_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00020_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00030_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00040_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00050_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00060_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00070_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00080_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00090_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00000_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00100_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00110_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00120_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00130_lim" android:duration="300" />
+    <item android:drawable="@drawable/conner_01_00140_lim" android:duration="300" />
+</animation-list>

@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+
+    <string-array name="devices_serial">
+        <!-- 测试机 -->
+        <item>PJ5TAYQCUWCY8HPB</item><!--oppo-->
+        <item>KWG7N17118018505</item><!--huawei-->
+        <item>APU0215C05006955</item><!--huawei-周丰-->
+        <item>ec45de9c</item><!--锤子-->
+        <item>1215fcc5af6f3205</item><!--三星-->
+        <item>N8K7N16C28007454</item><!--三星-->
+        <item>0715f7c463411738</item><!--三星-->
+        <!-- 用户 -->
+        <item>8ac1e0f40903</item><!--三星-->
+
+        <!-- 2018-01-19 -->
+    </string-array>
+
+</resources>

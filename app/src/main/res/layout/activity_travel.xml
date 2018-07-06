@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/translate">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="视频加载中..."/>
+
+    <FrameLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:fitsSystemWindows="true">
+
+        <com.jhqc.vr.travel.weight.MapView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/translate"
+            ></com.jhqc.vr.travel.weight.MapView>
+    </FrameLayout>
+
+    <com.jhqc.vr.travel.weight.MediaContainer
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_height"
+        android:background="@drawable/play_bottom_background"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="25dp"
+        android:paddingRight="15dp"
+        android:fitsSystemWindows="true">
+    </com.jhqc.vr.travel.weight.MediaContainer>
+
+    <RelativeLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_gravity="top|center_horizontal"
+        android:background="@drawable/title_top_background">
+
+        <ImageButton
+            android:id="@+id/title_btn_back"
+            android:layout_width="@dimen/title_back_height"
+            android:layout_height="@dimen/title_back_height"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/title_margin"
+            android:background="@drawable/title_back" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="top"
+            android:textColor="@color/white"
+            android:layout_marginTop="3dip"
+            android:textSize="@dimen/title_text" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lock_screen_backgroud"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <SeekBar
+        android:id="@+id/lockscreen_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:maxHeight="3dp"
+        android:minHeight="3dp"
+        android:progressDrawable="@drawable/video_progress_bar"
+        android:thumb="@drawable/progress_point"
+        android:thumbOffset="10dip" />
+
+    <RelativeLayout
+        android:id="@+id/lockscreen_total_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_below="@id/lockscreen_seekbar"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/lockscreen_duration_played_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="00:00"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/lockscreen_duration_total_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="00:00"
+            android:textColor="@color/video_player_duration_gray" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lockscreen_title_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_below="@id/lockscreen_total_layout"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/lockscreen_play_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lockscreen_title_tv"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:background="@color/translate"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/lockscreen_play_button_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:clickable="true"
+            android:background="@drawable/pause" />
+
+        <!--<ImageButton
+            android:id="@+id/lockscreen_back_button_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:clickable="true"
+            android:background="@drawable/title_back" />-->
+    </LinearLayout>
+
+
+    <!-- <ImageView
+         android:layout_width="40dp"
+         android:layout_height="40dp"
+         android:id="@+id/playback"
+         android:src="@drawable/title_back"
+         android:clickable="true"
+         android:layout_alignTop="@+id/textView"
+         android:layout_toRightOf="@+id/textView"
+         android:layout_marginLeft="22dp"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/lockscreen_play_button_layout"
+        android:background="@color/translate"
+        android:layout_marginBottom="30dp">
+
+        <ImageView
+            android:id="@+id/lockscreen_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="35dp"
+            android:minHeight="300dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/title_top_background" />
+
+        <!--<TextView
+            android:id="@+id/lockscreen_desc_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/lockscreen_image"
+            android:layout_alignLeft="@id/lockscreen_image"
+            android:layout_alignRight="@id/lockscreen_image"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="这是一个描述"
+            android:textColor="@color/video_player_duration_gray" />-->
+
+    </RelativeLayout>
+
+</RelativeLayout>

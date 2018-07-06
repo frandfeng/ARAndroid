@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pointTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_text"
+        android:text=""/>
+
+    <ImageView
+        android:id="@+id/pointIcon"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:scaleType="centerCrop"
+        android:src="@drawable/loction"/>
+
+</LinearLayout>

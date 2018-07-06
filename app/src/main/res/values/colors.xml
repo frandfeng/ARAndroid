@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="progress_bg">#5e5b5b</color>
+    <color name="progress_offset">#b4ff00</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="hsettitle">#595959</color>
+    <color name="blue">#0000ff</color>
+    <color name="bgcolor">#f7f7f7</color>
+    <color name="over_max_length">#fe0000</color>
+    <color name="index_word">#3e90cf</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="translate">#00ffffff</color>
+    <color name="translate_half">#88ffffff</color>
+    <color name="white">#ffffff</color>
+
+    <color name="dialog_btu">#2299ee</color>
+    <color name="dialog_nomal_baseline">#d9d9d9</color> <!-- #d9d9d9 -->
+    <color name="dialog_nomal_btn_preesed">#d9d9d9</color>  <!--  #016fa4 -->
+    <color name="driverline_color">#d9d9d9</color> <!-- #ebebeb -->
+
+    <color name="whrite_half">#b3b4b6</color>
+
+    <color name="video_player_progress_blue_bg">#24b6f2</color>
+    <color name="video_player_duration_gray">#929599</color>
+    <color name="video_player_loading_bg">#171819</color>
+    <color name="video_player_orange">#db692a</color>
+    <color name="video_player_gray">#aaaeb2</color>
+    <color name="video_player_blue">#24b6f2</color>
+    <color name="video_player_bg">#18181e</color>
+
+    <color name="area_line_border">#999999</color>
+    <color name="wheel_blue">#2299ee</color>
+</resources>

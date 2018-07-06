@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="conner_anim">
+        <item>@drawable/conner_01_00000_lim</item>
+        <item>@drawable/conner_01_00010_lim</item>
+        <item>@drawable/conner_01_00020_lim</item>
+        <item>@drawable/conner_01_00030_lim</item>
+        <item>@drawable/conner_01_00040_lim</item>
+        <item>@drawable/conner_01_00050_lim</item>
+        <item>@drawable/conner_01_00060_lim</item>
+        <item>@drawable/conner_01_00070_lim</item>
+        <!--<item>@drawable/conner_01_00080_lim</item>
+        <item>@drawable/conner_01_00090_lim</item>
+        <item>@drawable/conner_01_00000_lim</item>
+        <item>@drawable/conner_01_00100_lim</item>
+        <item>@drawable/conner_01_00110_lim</item>
+        <item>@drawable/conner_01_00120_lim</item>
+        <item>@drawable/conner_01_00130_lim</item>
+        <item>@drawable/conner_01_00140_lim</item>-->
+    </string-array>
+</resources>

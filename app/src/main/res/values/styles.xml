@@ -1,0 +1,122 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Dialog_Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ScaleActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/Scale</item>
+    </style>
+
+    <style name="Scale" parent="@android:style/Animation.Translucent">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_scale_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_scale_out</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="baseStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="wrapStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="widthfull" parent="baseStyle">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="jingoal_dialog_btn_left_style">
+        <item name="android:textSize">18dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:textColor">@color/dialog_btu</item>
+        <item name="android:background">@drawable/dialog_normal_btn_left_selector</item>
+    </style>
+
+    <style name="jingoal_dialog_btn_right_style">
+        <item name="android:textSize">18dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:textColor">@color/dialog_btu</item>
+        <item name="android:background">@drawable/dialog_normal_btn_right_selector</item>
+    </style>
+
+    <style name="jingoal_DilaogIcon">
+        <item name="android:layout_width">23dip</item>
+        <item name="android:layout_height">23dip</item>
+        <item name="android:background">@drawable/dialog_default_icon</item>
+    </style>
+
+    <style name="heightfull">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="jingoal_Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/shape</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="jingoal_dialog_layoutStyle" parent="widthfull">
+        <item name="android:layout_height">40dip</item>
+    </style>
+
+    <style name="jingoal_listViewStyle" parent="widthfull">
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:divider">@color/driverline_color</item>
+        <item name="android:dividerHeight">0.3dp</item>
+        <item name="android:listSelector">#00000000</item>
+        <item name="android:footerDividersEnabled">true</item>
+        <item name="android:fadingEdge">none</item>
+    </style>
+
+    <style name="jingoal_highset_exit_tv" parent="widthfull">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_marginLeft">30dp</item>
+    </style>
+
+    <style name="jingoal_highset_exit_view" parent="widthfull">
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:background">@color/dialog_nomal_baseline</item>
+    </style>
+</resources>
