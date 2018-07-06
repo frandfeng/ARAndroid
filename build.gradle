@@ -1,0 +1,48 @@
+ext {
+    GROUP = 'com.jhqc.AR_3D'
+    POM_ARTIFACT_ID = 'vr-travel'
+    VERSION_NAME = '1.0.0-SNAPSHOT'
+    POM_NAME = ''
+    POM_PACKAGING = 'aar'
+    POM_DESCRIPTION = '智能旅游sdk'
+
+    mavenUserName = hasProperty('MAVEN_USERNAME') ? MAVEN_USERNAME : "ls5811"
+    mavenPassword = hasProperty('MAVEN_PASSWORD') ? MAVEN_PASSWORD : "123456"
+}
+
+buildscript {
+    ext.kotlin_version = '1.1.3-2'
+    repositories {
+//        maven { url "F:\\repo" }
+//        mavenCentral()
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+subprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+//        jniLibs.srcDirs = ['libs']
+//        maven { url "F:\\repo" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
