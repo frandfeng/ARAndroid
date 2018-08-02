@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity implements IUnity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    cutImageAndSave();
+//                    cutImageAndSave();
                 }
             }).start();
 
