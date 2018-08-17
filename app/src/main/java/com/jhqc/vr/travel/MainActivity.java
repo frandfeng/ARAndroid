@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -73,6 +74,7 @@ import com.vuforia.Vuforia;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -159,7 +161,7 @@ public class MainActivity extends BaseActivity implements IUnity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-//                    cutImageAndSave();
+                    cutImageAndSave();
                 }
             }).start();
 
@@ -575,11 +577,11 @@ public class MainActivity extends BaseActivity implements IUnity {
     public void onPlayVideo(String videoName) {
         if (!TextUtils.isEmpty(videoName)) {
             //videoName = videoName.substring(0, videoName.indexOf("."));
-            int resId = getResources().getIdentifier(videoName, "raw", this.getPackageName());
-            if (resId != 0 && resId != -1) {
+//            int resId = getResources().getIdentifier(videoName, "raw", this.getPackageName());
+            if (videoName != "") {
 //                playVedio(resId);
                 Intent intent = new Intent(this, PlayVideoActivity.class);
-                intent.putExtra(PlayVideoActivity.RESID_TAG, resId);
+                intent.putExtra(PlayVideoActivity.RESNAME_TAG, videoName);
                 startActivity(intent);
                 //overridePendingTransition(R.anim.activity_scale_in, R.anim.activity_scale_out);
             } else {
@@ -730,8 +732,15 @@ public class MainActivity extends BaseActivity implements IUnity {
                 scale = 1;
             }
 
-            String fileName = GlobManager.get().getMConfig().getMapFileName();
-            Bitmap bitmap = ConfigManager.get(getBaseContext()).getMapBitmapFile(fileName, 4/scale, (int) SCREEN_WIDTH);
+//            String fileName = GlobManager.get().getMConfig().getMapFileName();
+//            Bitmap bitmap = ConfigManager.get(getBaseContext()).getMapBitmapFile(fileName, 4/scale, (int) SCREEN_WIDTH);
+//            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.zhinengdaoyouditu);
+
+            InputStream is = this.getResources().openRawResource(R.raw.zhinengdaoyouditu);
+            BitmapFactory.Options options=new BitmapFactory.Options();
+            options.inJustDecodeBounds = false;
+            Bitmap bitmap =BitmapFactory.decodeStream(is,null,options);
+
             final int WH = 256;
             // 获得要切割的图片的宽高
             int width = bitmap.getWidth();

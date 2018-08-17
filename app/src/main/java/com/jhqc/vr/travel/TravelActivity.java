@@ -2,6 +2,7 @@ package com.jhqc.vr.travel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
@@ -57,6 +58,7 @@ import com.vuforia.CameraDevice;
 import com.vuforia.Vuforia;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -423,7 +425,14 @@ public class TravelActivity extends BaseActivity implements ActivityCompat.OnReq
                 }
                 String fileName = GlobManager.get().getMConfig().getMapFileName();
                 if (!TextUtils.isEmpty(fileName)) {
-                    Bitmap bitmap = ConfigManager.get(getBaseContext()).getMapBitmapFile(fileName, 1, (int) SCREEN_WIDTH);
+//                    Bitmap bitmap = ConfigManager.get(getBaseContext()).getMapBitmapFile(fileName, 1, (int) SCREEN_WIDTH);
+
+                    InputStream is = getResources().openRawResource(R.raw.zhinengdaoyouditu);
+                    BitmapFactory.Options options=new BitmapFactory.Options();
+                    options.inJustDecodeBounds = false;
+                    Bitmap bitmap =BitmapFactory.decodeStream(is,null,options);
+
+//                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.zhinengdaoyouditu);
                     Message msg = new Message();
                     msg.what = 0;
                     msg.obj = bitmap;

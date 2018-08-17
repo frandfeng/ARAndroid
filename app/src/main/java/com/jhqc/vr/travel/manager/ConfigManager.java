@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.util.LruCache;
 
+import com.jhqc.AR_3D.R;
 import com.jhqc.vr.travel.model.MConfig;
 import com.jhqc.vr.travel.model.MScenicSpot;
 import com.jhqc.vr.travel.model.Pack;
@@ -55,13 +56,9 @@ public class ConfigManager {
         }
     };
 
-    static final String ROOT = "stream/";
-    static final String DIR_MAP = ROOT + "Map";
     static final String DIR_CONFIG = "Config";
     static final String DIR_SONG = "Song";
     static final String DIR_ICON = "Texture2d";
-
-    static final String CONFIG = "config.json";
 
     ConfigManager(Context ctx) {
         this.mContext = ctx;
@@ -84,7 +81,7 @@ public class ConfigManager {
             AssetManager manager = this.mContext.getAssets();
             InputStream is = null;
             try {
-                is = manager.open(ROOT + CONFIG);
+                is = mContext.getResources().openRawResource(R.raw.config);
                 String content = FileUtils.read2String(is);
                 Pack pack = DataLoader.loadDataByJson(content, Pack.class);
 
@@ -93,7 +90,7 @@ public class ConfigManager {
                     dataList.addAll(pack.getDatas());
                 }
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 LogUtils.logError(e.getMessage() + e.getLocalizedMessage());
             } finally {
                 if (is != null) {
@@ -105,37 +102,6 @@ public class ConfigManager {
             }
         }
         return dataList;
-    }
-
-    public Bitmap getMapBitmapFile(String fileName, int muti, int screenWidth) {
-        if (screenWidth > 1920) {
-            DEFAULT_MUTI = 1;
-        }
-        if(mBitmapCache.get(fileName) != null) {
-            return mBitmapCache.get(fileName);
-        }
-        fileName = DIR_MAP + "/" + fileName;
-        Bitmap bitmap = null;
-        AssetManager am = mContext.getResources().getAssets();
-        InputStream is = null;
-        try {
-            is = am.open(fileName);
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
-            options.inSampleSize = muti;
-            bitmap = BitmapFactory.decodeStream(is, null, options);
-            mBitmapCache.put(fileName, bitmap);
-        } catch (IOException e) {
-            LogUtils.logView(e.getMessage() + e.getLocalizedMessage());
-        }  finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                }
-            }
-        }
-        return bitmap;
     }
 
     public Bitmap getIconBitmapFile(String fileName, int scale) {

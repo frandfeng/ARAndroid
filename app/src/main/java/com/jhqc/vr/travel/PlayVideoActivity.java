@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,11 +21,17 @@ import com.jhqc.vr.travel.unity.UnityBridgeHandler;
 import com.jhqc.vr.travel.util.LogUtils;
 import com.jhqc.vr.travel.util.ToastUtils;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+
 public class PlayVideoActivity extends AppCompatActivity {
 
-    public static final String RESID_TAG = "RESID_TAG";
+    public static final String RESNAME_TAG = "RESNAME_TAG";
 
-    int resID;
+    String resName;
 
     VideoView videoView;
     View loadingView;
@@ -38,7 +45,7 @@ public class PlayVideoActivity extends AppCompatActivity {
         setContentView(R.layout.video_player_layout);
 
         Intent intent = getIntent();
-        resID = intent.getIntExtra(RESID_TAG, 0);
+        resName = intent.getStringExtra(RESNAME_TAG);
         videoView = (VideoView) findViewById(R.id.vedio_player);
         loadingView = findViewById(R.id.loading);
         backView = (ImageButton) findViewById(R.id.vedio_back);
@@ -54,8 +61,18 @@ public class PlayVideoActivity extends AppCompatActivity {
 //        mc.setVisibility(View.VISIBLE);
         videoView.setMediaController(mc);
 
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + resID);
-        videoView.setVideoURI((uri));
+//        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + resID);
+
+//        getAssets().open("filename");
+        String videoPath = "file:///android_asset/Video/"+resName+".mp4";
+        Log.d("frand", "video path "+ videoPath);
+        try {
+            videoView.setVideoURI(Uri.fromFile(inputstreamtofile(getAssets().open("Video/"+resName+".mp4"))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        InputStream is = getAssets().open(videoPath);
+//        videoView.setVideoPath(videoPath);
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
@@ -82,6 +99,23 @@ public class PlayVideoActivity extends AppCompatActivity {
         videoView.requestFocus();
         videoView.start();
         mc.show(5000);
+    }
+
+    public File inputstreamtofile(InputStream ins) {
+        File file = new File("/sdcard/temp.mp4");
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     @Override
