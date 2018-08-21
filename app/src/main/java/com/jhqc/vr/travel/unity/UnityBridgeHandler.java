@@ -21,6 +21,7 @@ import com.jhqc.vr.travel.unity.model.ULog;
 import com.jhqc.vr.travel.unity.model.UPlayBotton;
 import com.jhqc.vr.travel.unity.model.UPlayContinue;
 import com.jhqc.vr.travel.unity.model.UPlayVideo;
+import com.jhqc.vr.travel.unity.model.UShutDownVideo;
 import com.jhqc.vr.travel.unity.model.UTypeToken;
 import com.jhqc.vr.travel.util.LogUtils;
 import com.jhqc.vr.travel.util.OtherUtils;
@@ -120,13 +121,24 @@ public class UnityBridgeHandler {
                         ubModel = DataLoader.loadDataByJson(json, type);
                         if (ubModel != null && ubModel.params != null) {
                             String videoName = ((UPlayVideo)ubModel.params).videoName;
-                            iUnity.onPlayVideo(videoName);
+                            int progress = ((UPlayVideo)ubModel.params).progress;
+                            iUnity.onPlayVideo(videoName, progress);
                         }
                     }
                     break;
                 case UnityConstants.N_REQARSCAN:
                     if (iUnity != null) {
-                        iUnity.onARScan();
+//                        iUnity.onARScan();
+                    }
+                    break;
+                case UnityConstants.N_SHUTDOWNVIDEO:
+                    if (iUnity != null) {
+                        type = new TypeToken<UBModel<UShutDownVideo>>(){}.getType();
+                        ubModel = DataLoader.loadDataByJson(json, type);
+                        if (ubModel != null && ubModel.params != null) {
+                            boolean resetPosition = ((UShutDownVideo)ubModel.params).resetposition;
+                            iUnity.onShutDownVideo(resetPosition);
+                        }
                     }
                     break;
             }

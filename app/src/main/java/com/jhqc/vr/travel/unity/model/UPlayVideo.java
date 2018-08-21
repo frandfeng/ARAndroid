@@ -7,5 +7,6 @@ package com.jhqc.vr.travel.unity.model;
 public class UPlayVideo {
 
     public String videoName;
+    public int progress;
 
 }

@@ -28,6 +28,8 @@ public class UnityConstants {
     public static final String N_REQPLAYVIDEO = "ReqPlayVideo";
     /** unity指令原生打开AR扫描, Unity调用Native函数名 */
     public static final String N_REQARSCAN = "ReqARScan";
+    /** unity指令关闭视频播放控件, Unity调用Native函数名 */
+    public static final String N_SHUTDOWNVIDEO = "ReqShutdownVideo";
 
     /** GPS状态回调， Native回调Unity函数名 */
     public static final String U_GPSSTATE = "OnGPSStateResult";

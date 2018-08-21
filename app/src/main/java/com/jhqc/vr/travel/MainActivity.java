@@ -64,6 +64,7 @@ import com.jhqc.vr.travel.util.ActivityUtils;
 import com.jhqc.vr.travel.util.LogUtils;
 import com.jhqc.vr.travel.util.OtherUtils;
 import com.jhqc.vr.travel.util.SPUtils;
+import com.jhqc.vr.travel.util.ScreenUtils;
 import com.jhqc.vr.travel.util.ToastUtils;
 import com.jhqc.vr.travel.util.ViewUtils;
 import com.jhqc.vr.travel.weight.DragFloatActionButton;
@@ -88,6 +89,8 @@ public class MainActivity extends BaseActivity implements IUnity {
     ObjectAnimator roteAnim;
 
     DragFloatActionButton fab;
+    PlayVideoView videoView;
+    int videoProgress;
     ViewGroup root;
     ViewGroup view;
 
@@ -157,6 +160,7 @@ public class MainActivity extends BaseActivity implements IUnity {
             initData();
             initControl();
             initControlBar();
+            initVideoView();
             UnityBridgeHandler.currentActivity.registerUnity(this);
             new Thread(new Runnable() {
                 @Override
@@ -483,6 +487,86 @@ public class MainActivity extends BaseActivity implements IUnity {
         });
     }
 
+    RelativeLayout.LayoutParams params;
+
+    private void initVideoView() {
+        videoProgress = 0;
+        double widthRate = 1670/2208.0;
+        double heightRate = 940/1242.0;
+        double top = 41/1242.0;
+        int screenWidth = ScreenUtils.getScreenWidth(this);
+        int screenHeight = ScreenUtils.getScreenHeight(this);
+        int viewWidth = (int)(widthRate * screenWidth);
+        int viewHeight = (int)(heightRate * screenHeight);
+        int topMargin = (int)(top * ScreenUtils.getScreenHeight(this));
+        videoView = new PlayVideoView(MainActivity.this);
+        params = new RelativeLayout.LayoutParams(viewWidth, viewHeight);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        params.topMargin = topMargin + (screenHeight-viewHeight)/2;
+        videoView.setLayoutParams(params);
+        Log.d("frand", String.format("initVideoView screen width %d, screenHeight %d, viewWidth %d, viewHeight %d, topMargin %d", screenWidth, screenHeight, viewWidth, viewHeight, topMargin));
+    }
+
+    public void setVideoUrl(final String resName) {
+        if (videoView != null) {
+            videoView.setVideoUrl(resName);
+        }
+    }
+
+    public void startPlayVideo() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (videoView.getParent() == null) {
+                    root.addView(videoView, params);
+                    Log.d("frand", "startPlayVideo");
+                }
+                videoView.bringToFront();
+                videoView.videoView.start();
+                videoView.setFocusable(true);
+                videoView.requestFocus();
+                videoView.videoView.setFocusable(true);
+                videoView.videoView.requestFocus();
+                videoView.videoView.setZOrderOnTop(true);
+                videoView.videoView.setVisibility(View.VISIBLE);
+                videoView.setVisibility(View.VISIBLE);
+                videoView.videoView.seekTo(videoProgress);
+            }
+        }, 10);
+    }
+
+    public void stopPlayVideo() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("frand", "stopPlayVideo");
+                videoProgress = 0;
+                videoView.videoView.pause();
+                videoView.videoView.setZOrderOnTop(false);
+                videoView.setVideoUrl(null);
+                videoView.videoView.setVisibility(View.GONE);
+                videoView.setVisibility(View.GONE);
+                if (videoView.getParent() != null) {
+                    root.removeView(videoView);
+                }
+            }
+        }, 10);
+    }
+
+    public void pausePlayVideo() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("frand", "pausePlayVideo");
+                videoProgress = videoView.videoView.getCurrentPosition();
+                videoView.videoView.pause();
+                videoView.videoView.setZOrderOnTop(false);
+                videoView.videoView.setVisibility(View.GONE);
+                videoView.setVisibility(View.GONE);
+            }
+        }, 10);
+    }
+
     private void startLocation() {
         if (LocationsManager.isOpenGPS(this)) {
             locationControl.startAutoGPS();
@@ -574,16 +658,24 @@ public class MainActivity extends BaseActivity implements IUnity {
     }
 
     @Override
-    public void onPlayVideo(String videoName) {
+    public void onPlayVideo(String videoName, int progress) {
         if (!TextUtils.isEmpty(videoName)) {
             //videoName = videoName.substring(0, videoName.indexOf("."));
 //            int resId = getResources().getIdentifier(videoName, "raw", this.getPackageName());
             if (videoName != "") {
 //                playVedio(resId);
-                Intent intent = new Intent(this, PlayVideoActivity.class);
-                intent.putExtra(PlayVideoActivity.RESNAME_TAG, videoName);
-                startActivity(intent);
+//                Intent intent = new Intent(this, PlayVideoActivity.class);
+//                intent.putExtra(PlayVideoActivity.RESNAME_TAG, videoName);
+//                startActivity(intent);
                 //overridePendingTransition(R.anim.activity_scale_in, R.anim.activity_scale_out);
+                if (progress == -1) {
+                    setVideoUrl(videoName);
+                    startPlayVideo();
+                } else {
+                    Intent intent = new Intent(this, PlayVideoActivity.class);
+                    intent.putExtra(PlayVideoActivity.RESNAME_TAG, videoName);
+                    startActivity(intent);
+                }
             } else {
                 UnityBridgeHandler.postUnityPlayVideoEnd();
                 LogUtils.logVedio("找不到资源：" + videoName);
@@ -591,9 +683,12 @@ public class MainActivity extends BaseActivity implements IUnity {
         }
     }
 
-    @Override
-    public void onARScan() {
-        ActivityUtils.startActivity(this, ImageTargets.class);
+    public void onShutDownVideo(boolean resetPostion) {
+        if (resetPostion) {
+            stopPlayVideo();
+        } else {
+            pausePlayVideo();
+        }
     }
 
     /*来电事件处理*/
@@ -771,7 +866,6 @@ public class MainActivity extends BaseActivity implements IUnity {
                     if (y == rows-1) {
                         bitHeight = height % 256 == 0 ? WH : height % WH;
                     }
-                    Log.i("frand", "width :"+width+",height="+height+",xPoint="+xPoint+",yPoint="+yPoint+",WH="+WH);
                     Bitmap sliceBitmap = Bitmap.createBitmap(bitmap, xPoint, yPoint, bitWidth, bitHeight);
                     String path = String.format("yiheyuan_%dx_%d_%d.png", scale, x, y);
                     saveImage(sliceBitmap, path);
@@ -795,11 +889,9 @@ public class MainActivity extends BaseActivity implements IUnity {
             avaterFile.delete();
         }
         try {
-            Log.i("frand", "try save path: "+avaterFile.getPath());
             avaterFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(avaterFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            Log.i("frand", "save path: "+avaterFile.getPath());
             fos.flush();
             fos.close();
         } catch (IOException e) {

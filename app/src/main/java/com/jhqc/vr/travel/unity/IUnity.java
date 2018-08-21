@@ -10,8 +10,8 @@ public interface IUnity {
 
     void onReady(boolean isReady);
 
-    void onPlayVideo(String videoName);
+    void onPlayVideo(String videoName, int progress);
 
-    void onARScan();
+    void onShutDownVideo(boolean resetPosition);
 
 }
